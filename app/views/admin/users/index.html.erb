@@ -2,6 +2,9 @@
 <% @users.each do |user| %>
   <%= user.firstname %> <%= user.lastname %>, <%= user.email %>
   <% if user.admin %>*<% end %>
+  <%= form_for [:admin, user], method: "delete" do |f| %>
+    <button type="submit">Kill</button>
+  <% end %>
   <br/>
 <% end %>
 
