@@ -1,5 +1,8 @@
+
 <% @users.each do |user| %>
   <%= user.firstname %> <%= user.lastname %>, <%= user.email %>
   <% if user.admin %>*<% end %>
   <br/>
 <% end %>
+
+<%= paginate @users %>
