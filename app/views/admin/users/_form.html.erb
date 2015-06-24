@@ -1,9 +1,9 @@
-<%= form_for @users, url: admin_user_path(@users), html: {method: :patch} do |f| %>
-  <% if @users.errors.any? %>
+<%= form_for @user, url: admin_user_path(@user), html: {method: :patch} do |f| %>
+  <% if @user.errors.any? %>
     <div>
-      <%= pluralize(@users.errors.count, "error") %> prevented this user from being submitted:
+      <%= pluralize(@user.errors.count, "error") %> prevented this user from being submitted:
       <ul>
-        <% @users.errors.full_messages.each do |msg| %>
+        <% @user.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>

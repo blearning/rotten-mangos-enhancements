@@ -11,28 +11,28 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
-    @users = User.new
+    @user = User.new
   end
 
   def create
-    @users = User.new(user_params)
+    @user = User.new(user_params)
 
-    if @users.save
-      redirect_to admin_users_path, notice: "#{@users.firstname} was submitted successfully!"
+    if @user.save
+      redirect_to admin_users_path, notice: "#{@user.firstname} was submitted successfully!"
     else
       render :new
     end
   end
 
   def edit
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
 
-    if @users.update_attributes(user_params)
-      redirect_to admin_users_path + "/#{params[:id]}"
+    if @user.update_attributes(user_params)
+      redirect_to admin_user_path(@user)
     else
       render :edit
     end

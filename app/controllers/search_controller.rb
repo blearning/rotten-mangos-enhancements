@@ -21,11 +21,11 @@ class SearchController < ApplicationController
       @results = @results.where("runtime_in_minutes > ?", 120) 
     end
 
-    @results = @results.page(params[:page]).per(1)
+    @results = @results.page(params[:page]).per(10)
 
   end
 
 end
 
 
-#Movie.where("title LIKE  ? ", "%%").where("director LIKE ? ", "%%").where("runtime_in_minutes  ? ", "90")
+#Movie.where("title LIKE  ? ", "%%").where("director LIKE ? ", "%%").where("runtime_in_minutes ? ", "90")
