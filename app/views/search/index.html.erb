@@ -1,0 +1,25 @@
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag 'Title' %>
+  <%= text_field_tag 'title' %>
+  <br/>
+  <%= label_tag 'Director' %>
+  <%= text_field_tag 'director' %>
+  <br/>
+  <%= select_tag "duration", "<option>Under 90</option><option>Between 90 and 120</option><option>Over 120</option>".html_safe %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% @results.each do |movie| %>
+  <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
+
+  <%= link_to image_tag(movie.image_url(:thumb)), movie_path(movie) %>
+
+  <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
+  <h2><%= link_to movie.title, movie_path(movie) %> | <%= movie.review_average %>/10</h2>
+  <h3><%= formatted_date(movie.release_date) %></h3>
+  <h4>Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</h4>
+  <p><%= movie.description %></p>
+  <hr>
+<% end %>
+
+<%= paginate @results %>
