@@ -1,9 +1,9 @@
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
+<%= form_for @users, url: admin_user_path(@users), html: {method: :patch} do |f| %>
+  <% if @users.errors.any? %>
     <div>
-      <%= pluralize(@movie.errors.count, "error") %> prevented this movie from being submitted:
+      <%= pluralize(@users.errors.count, "error") %> prevented this user from being submitted:
       <ul>
-        <% @user.errors.full_messages.each do |msg| %>
+        <% @users.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -15,27 +15,16 @@
   </div>
   <div>
     <%= f.label "Last Name" %><br>
-    <%= f.date_field "lastname" %>
+    <%= f.text_field "lastname" %>
   </div>
   <div>
     <%= f.label "email" %><br>
     <%= f.text_field "email" %>
   </div>
   <div>
-    <%= f.label "runtime_in_minutes" %><br>
-    <%= f.text_field "runtime_in_minutes" %>
+    <%= f.label "Admin" %><br>
+    <%= f.check_box "admin" %>
   </div>
-  <div>
-    <%= f.label "poster_image_url" %><br>
-    <%= f.text_field "poster_image_url" %>
-  </div>
-  <div>
-    <%= f.label "description" %><br>
-    <%= f.text_area "description" %>
-  </div>
-  <p>
-    <%= f.file_field :image %>
-  </p>
   <div>
     <%= f.submit "Submit" %> 
   </div>
