@@ -14,7 +14,22 @@ RottenMangoes::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  # Changing mail delivery to either :smtp, :sendmail, :file, :test
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+  :address              => "mail.brianli.ca",
+  :port                 => 26,
+  :domain               => "brianli.ca",
+  :user_name            => "ruby@brianli.ca",
+  :password             => "ruby123",
+  :authentication       => 'plain',
+  :enable_starttls_auto => true,
+  :openssl_verify_mode  => 'none'  }
+
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -23,6 +23,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     #TODO check that you're not deleting yourselfß
     @user = User.find(params[:id])
+    UserMailer.deleted_account_notification(@user).deliver
     @user.destroy
     redirect_to admin_users_path
   end

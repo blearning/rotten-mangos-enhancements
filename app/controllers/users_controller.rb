@@ -13,14 +13,19 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    ## mail stuff
     if @user.save
+      
+      UserMailer.created_account_notification(@user).deliver
+
+    ### mail stuff 
       session[:user_id] = @user.id
       redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}!"
     else
       render :new
     end
   end
+
 
   protected
 
