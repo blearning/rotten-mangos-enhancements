@@ -24,10 +24,29 @@ class Movie < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :title_search, -> (title="") { where("title LIKE ?", "%#{title}%") if !title.blank? }
+
+  scope :director_search, -> (director="") { where("director LIKE ?", "%#{director}%")}
+
+  scope :duration_under90_search, -> { where("runtime_in_minutes < 90") }
+
+  scope :duration_between_90_and_120_search, -> { where("runtime_in_minutes >= 90 AND runtime_in_minutes <= 120") }
+
+  scope :duration_over120_search, -> { where("runtime_in_minutes > 120") }
+
+
+  # def self.duration_select(search_terms)
+  #   if search_terms[:less_than].present
+  #     duration_less_than(search_terms[:less_than])
+  #   elsif ...
+
+  #   end
+  # end
+
   def review_average
     reviews.sum(:rating_out_of_ten)/reviews.size if reviews.size > 0 || !reviews.size
   end
-
+  
   protected
 
   def release_date_is_in_the_future
@@ -37,3 +56,6 @@ class Movie < ActiveRecord::Base
   end
 
 end
+
+
+Movie.title_search.director_search
