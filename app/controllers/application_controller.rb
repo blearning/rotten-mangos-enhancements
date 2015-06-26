@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def current_user_reset
+    @current_user = nil
+  end
+
   def user_admin?
     current_user.admin if session[:user_id]
   end

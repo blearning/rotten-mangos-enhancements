@@ -7,6 +7,14 @@
   <%= form_for [:admin, user], method: "delete" do |f| %>
     <button type="submit">Kill</button>
   <% end %>
+
+  <%= form_for [:admin, user], method: "login_as_user" do |f| %>
+    <button type="submit">login as user</button>
+  <% end %>
+
+  
+
+
   <br/>
 <% end %>
 

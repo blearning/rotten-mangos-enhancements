@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :restrict_admin_access, only: [:index]
+  before_filter :restrict_admin_access, except: [:index, :new]
+  #before_filter :restrict_admin_access, except: [:index, :new]
 
   def index
     @users = User.all

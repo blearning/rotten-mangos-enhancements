@@ -9,6 +9,8 @@ RottenMangoes::Application.routes.draw do
 
   namespace :admin do
     resources :users
+    post '/users/:id', to: 'users#login_as_user', as: 'login_as_user'
+    get '/re-log', to: 'users#return_to_admin', as: 'login_back_to_admin'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

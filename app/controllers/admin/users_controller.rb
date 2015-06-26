@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
 
-  before_filter :restrict_admin_access
+  before_filter :restrict_admin_access, except: [:return_to_admin]
 
   def index
     @users = User.all.page(params[:page]).per(5)
@@ -44,6 +44,20 @@ class Admin::UsersController < ApplicationController
     UserMailer.deleted_account_notification(@user).deliver
     @user.destroy
     redirect_to admin_users_path 
+  end
+
+
+  def login_as_user
+    session[:admin_id] = current_user.id
+    session[:user_id] = params[:id]
+    redirect_to root_path
+  end
+
+  def return_to_admin
+    current_user_reset
+    session[:user_id] = session[:admin_id]
+    session[:admin_id] = nil
+    redirect_to admin_users_path
   end
 
   protected
